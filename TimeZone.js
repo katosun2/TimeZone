@@ -1,8 +1,8 @@
 /* =============================================================================
 #     FileName: TimeZone.js
 #         Desc: JS时区处理方法   
-#      Version: 1.1.1
-#   LastChange: 2021-06-01 10:22:26
+#      Version: 1.1.2
+#   LastChange: 2021-06-18 17:47:11
 ============================================================================= */
 (function(window, undefined){
   var TimeZone = window.TimeZone || {};
@@ -228,8 +228,8 @@
     }
 
     var curDate = new Date(timestamp * 1000);
-    var curMonth = curDate.getUTCMonth() + 1;
-    var curYear = curDate.getUTCFullYear();
+    var curMonth = curDate.getMonth() + 1;
+    var curYear = curDate.getFullYear();
     var days = new Date(curYear, curMonth, 0).getDate();
 
     // 下一个月的第0天，就是上一个月的最后一天
