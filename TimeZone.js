@@ -1,8 +1,8 @@
 /* =============================================================================
 #     FileName: TimeZone.js
 #         Desc: JS时区处理方法   
-#      Version: 1.1.2
-#   LastChange: 2021-06-18 17:47:11
+#      Version: 1.1.3
+#   LastChange: 2021-11-24 10:43:58
 ============================================================================= */
 (function(window, undefined){
   var TimeZone = window.TimeZone || {};
@@ -273,6 +273,34 @@
 
     return dayList;
   };
-
+  
+  /**
+   * 两个时间戳是否在同一天内
+   * @param { Number } timestamp , timestamp2, 时间戳
+   * @param { Number } timeZone, 时间 东区为负，西区为正，如东8区，-8，默认东8区
+   */
+  TimeZone.isSameDay = function(timestamp,timestamp2,timeZone){
+    if(!timestamp2){
+      timestamp2 = Math.round(Date.now() / 1000);
+    }
+    if(typeof timeZone === 'undefined'){
+      timeZone = TimeZone.timeZone;
+    }
+    return TimeZone.getZeroByTimestamp(timestamp,timeZone) === TimeZone.getZeroByTimestamp(timestamp2,timeZone);
+  }
+  /**
+   * 两个时间戳是否在同一年内
+   * @param { Number } timestamp , timestamp2, 时间戳
+   * @param { Number } timeZone, 时间 东区为负，西区为正，如东8区，-8，默认东8区
+   */
+  TimeZone.isSameYear = function(timestamp,timestamp2,timeZone){
+    if(!timestamp2){
+      timestamp2 = Math.round(Date.now() / 1000);
+    }
+    if(typeof timeZone === 'undefined'){
+      timeZone = TimeZone.timeZone;
+    }
+    return TimeZone.formatTimeStamp(timestamp,timeZone,'YYYY') === TimeZone.formatTimeStamp(timestamp2,timeZone,'YYYY');
+  }
   window.TimeZone = TimeZone;
 })(window);
